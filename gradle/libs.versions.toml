@@ -1,6 +1,6 @@
 [versions]
 adapterRxjava2 = "latest.version"
-agp = "8.3.1"
+agp = "8.5.1"
 coreTesting = "2.2.0"
 gson = "2.10.1"
 kotlin = "1.9.0"

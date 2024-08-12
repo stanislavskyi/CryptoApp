@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hfad.cryptoapp.R
 import com.hfad.cryptoapp.presentation.adapters.CoinInfoAdapter
 import com.hfad.cryptoapp.data.network.model.CoinInfoDto
+import com.hfad.cryptoapp.databinding.ActivityMainBinding
 import com.hfad.cryptoapp.domain.CoinInfo
 
 
@@ -18,10 +19,13 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: CoinViewModel
 
+    private val binding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
 
         val adapter = CoinInfoAdapter(this)
         adapter.onCoinClickListener = object : CoinInfoAdapter.OnCoinClickListener {
@@ -31,8 +35,8 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
-        val recyclerViewCoinPriceList = findViewById<RecyclerView>(R.id.recyclerViewCoinPriceList)
-        recyclerViewCoinPriceList.adapter = adapter
+
+        binding.recyclerViewCoinPriceList.adapter = adapter
 
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
         //viewModel.loadData() init in CoinViewModel
