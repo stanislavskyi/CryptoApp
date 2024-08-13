@@ -37,12 +37,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.recyclerViewCoinPriceList.adapter = adapter
-
+        binding.recyclerViewCoinPriceList.itemAnimator = null
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
         //viewModel.loadData() init in CoinViewModel
 
         viewModel.coinInfoList.observe(this){
-            adapter.coinInfoList = it
+            adapter.submitList(it)
 //            Log.d("TEST_OF_LOADING_DATA", "Success in activity: $it")
         }
 
