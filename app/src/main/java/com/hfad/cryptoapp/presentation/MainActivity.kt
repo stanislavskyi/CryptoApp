@@ -30,9 +30,11 @@ class MainActivity : AppCompatActivity() {
         val adapter = CoinInfoAdapter(this)
         adapter.onCoinClickListener = object : CoinInfoAdapter.OnCoinClickListener {
             override fun onCoinClick(coinInfoDto: CoinInfo) {
-                val intent =
-                    CoinDetailActivity.newIntent(this@MainActivity, coinInfoDto.fromSymbol)
-                startActivity(intent)
+                if (isOnePaneMode()){
+                    launchDetailActivity(coinInfoDto.fromSymbol)
+                }else{
+                    launchDetailFragment(coinInfoDto.fromSymbol)
+                }
             }
         }
 
@@ -49,7 +51,23 @@ class MainActivity : AppCompatActivity() {
 //        viewModel.getDetailInfo("BTC").observe(this, Observer {
 //            Log.d("TEST_OF_LOADING_DATA", "Success in activity: $it")
 //        })
+    }
+
+    private fun isOnePaneMode() = binding.fragmentContainer == null
 
 
+    private fun launchDetailActivity(fromSymbol: String){
+        val intent = CoinDetailActivity.newIntent(
+            this@MainActivity,
+            fromSymbol
+        )
+        startActivity(intent)
+    }
+
+    private fun launchDetailFragment(fromSymbol: String) {
+        supportFragmentManager.popBackStack()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, CoinDetailFragment.newInstance(fromSymbol))
+            .addToBackStack(null).commit()
     }
 }
