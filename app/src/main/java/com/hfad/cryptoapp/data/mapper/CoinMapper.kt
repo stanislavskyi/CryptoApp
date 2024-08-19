@@ -11,8 +11,9 @@ import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.TimeZone
+import javax.inject.Inject
 
-class CoinMapper {
+class CoinMapper @Inject constructor(){
 
     companion object{
         const val BASE_IMAGE_URL = "https://cryptocompare.com"

@@ -101,8 +101,8 @@ dependencies {
     // optional - Test helpers for Lifecycle runtime
     testImplementation (libs.androidx.lifecycle.runtime.testing)
 
-    implementation("com.google.dagger:dagger:2.51.1")
-    kapt("com.google.dagger:dagger-compiler:2.51.1")
+    implementation(libs.dagger)
+    kapt(libs.dagger.compiler)
 
 
     //room
